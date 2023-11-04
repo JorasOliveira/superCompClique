@@ -1,0 +1,2 @@
+# superCompClique
+the clique problem
