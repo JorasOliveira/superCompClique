@@ -1,9 +1,18 @@
 #include "graph.h"
+
 int main() {
 
-    vector<vector<int>> graph = readGraph(FILE_NAME, NUM_VERTICES);
+    std::string fileName = "graph.txt";
+    int numVertices = 1000;
 
-    vector<int> maximumClique = FindMaximumClique(graph, NUM_VERTICES);
+    vector<vector<int>> graph = readGraph(fileName, numVertices);
+    vector<int> maximumClique = FindMaximumClique(graph, numVertices);
+
+    // Print the maximum clique
+    for (int i = 0; i < maximumClique.size(); i++) {
+        cout << maximumClique[i] << " ";
+    }
+    cout << endl;
 
     return 0;
 }

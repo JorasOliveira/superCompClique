@@ -6,19 +6,12 @@
 #include <iostream>
 #include <fstream>
 #include <omp.h>
+#include <string>
 // #include <mpi.h>
 using namespace std;
 
+std::vector<std::vector<int>> readGraph(const std::string& fileName, int& numVertices);
 
-#include <string>
-#include <vector>
-
-const std::string FILE_NAME = "graph.txt";
-int NUM_VERTICES = 1000;
-
-vector<vector<int>> readGraph(const string& FILE_NAME, int& NUM_VERTICES);
-
-vector<int> FindMaximumClique(vector<vector<int>> graph, int NUM_VERTICES);
-
+std::vector<int> FindMaximumClique(std::vector<std::vector<int>> graph, int numVertices);
 
 #endif
