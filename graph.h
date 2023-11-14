@@ -12,6 +12,7 @@ using namespace std;
 
 std::vector<std::vector<int>> readGraph(const std::string& fileName, int& numVertices);
 
-std::vector<int> FindMaximumClique(std::vector<std::vector<int>> graph, int numVertices);
+std::vector<int> FindMaximumClique(std::vector<std::vector<int>> &graph);
+
 
 #endif
