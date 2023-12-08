@@ -8,6 +8,13 @@ std::vector<std::vector<int>> readGraph(const std::string& nomeArquivo, int& num
 
     std::vector<std::vector<int>> grafo(numVertices, std::vector<int>(numVertices, 0));
 
+    // Inicializa a matriz de adjacência com todos os zeros
+    for (int i = 0; i < numVertices; ++i) {
+        for (int j = 0; j < numVertices; ++j) {
+            grafo[i][j] = 0;
+        }
+    }
+
     for (int i = 0; i < numArestas; ++i) {
         int u, v;
         arquivo >> u >> v;
