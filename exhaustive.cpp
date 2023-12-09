@@ -2,13 +2,17 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <omp.h>
+#include <chrono>
 
-using namespace std;
 
+// abordagem exaustiva
+
+// Checa se a clique é válida
 bool IsClique(const vector<int>& clique, const vector<vector<int>>& graph) {
     for (int i = 0; i < clique.size(); ++i) {
         for (int j = i + 1; j < clique.size(); ++j) {
-            if (graph[clique[i]][clique[j]] == 0) {
+            if (graph[clique[i]][clique[j]] == 0) { // se nao houver aresta entre os vertices, nao eh um clique
                 return false;
             }
         }
@@ -16,22 +20,32 @@ bool IsClique(const vector<int>& clique, const vector<vector<int>>& graph) {
     return true;
 }
 
-void FindClique(vector<int>& current, vector<int>& maximum, const vector<vector<int>>& graph, int start = 0) {
+// Encontra a maior clique em um grafo usando uma abordagem de força bruta recursiva.
+double FindClique(vector<int>& current, vector<int>& maximum, const vector<vector<int>>& graph, int start = 0) {
+    auto start_time = std::chrono::high_resolution_clock::now();
+    // para cada vertice no grafo
     for (int i = start; i < graph.size(); ++i) {
-        current.push_back(i);
+        current.push_back(i);  // adiciona o vertice atual ao clique atual
+        // se o clique atual for maior que o maximo e for um clique valido, atualiza o maximo
         if (IsClique(current, graph) && current.size() > maximum.size()) {
             maximum = current;
         }
-        FindClique(current, maximum, graph, i + 1);
+        // recursao para explorar os nos adjacentes
+        double sub_time = FindClique(current, maximum, graph, i + 1);
         current.pop_back();
     }
-}
 
+    auto end_time = std::chrono::high_resolution_clock::now();
+    double total_time = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count();
+    return total_time;
+}
 vector<int> FindMaximumClique(vector<vector<int>>& graph) {
     vector<int> current, maximum;
-    FindClique(current, maximum, graph);
+    double time = FindClique(current, maximum, graph);
+    std::cout << "Execution time for serial approach: " << time * 1e-6 << " seconds" << std::endl;
     return maximum;
 }
+
 
 // //BRON-KERBOSCH ALGORYTHM
 // tentei aplicar este algoritmo porem nao sei se esta correto, 

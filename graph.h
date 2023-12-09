@@ -14,7 +14,7 @@ std::vector<std::vector<int>> readGraph(const std::string& fileName, int& numVer
 
 std::vector<int> FindMaximumClique(std::vector<std::vector<int>> &graph);
 
-std::vector<int> FindMaximumCliqueOpenMP(std::vector<std::vector<int>> &graph);
+std::vector<int> FindMaximumCliqueOMP(std::vector<std::vector<int>> &graph);
 
 
 #endif
